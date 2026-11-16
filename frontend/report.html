@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report a Scam — ConfirmAm</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div>
+      <div>
+        <span>🛡️</span>
+        <strong style="color: #fff; font-size: 1.2rem;">Confirm<span style="color: #34d399;">Am</span></strong>
+      </div>
+      <div>
+        <a href="index.html">Scanner</a>
+        <a href="report.html" style="color: #34d399;">Report a Scam</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Form -->
+  <main>
+    <div>
+      <p style="color: #34d399; font-weight: 600; font-size: 0.85rem;">Community Threat Intelligence</p>
+      <h1>Report a <span>Suspected Scam</span></h1>
+      <p>Help protect others by submitting fraudulent websites, scam phone numbers, fake investment platforms, or phishing messages.</p>
+    </div>
+
+    <div class="bg-slate-900">
+      <form id="scamReportForm" onsubmit="submitScamReport(event)">
+        <div style="margin-bottom: 16px;">
+          <label for="scamCategory">Type of Fraud:</label>
+          <select id="scamCategory" required>
+            <option value="Fake Website / Phishing Link">Fake Website / Phishing Link</option>
+            <option value="Fake Bank / Fintech Impersonation">Fake Bank / Fintech Impersonation (GTB, OPay, Access, etc.)</option>
+            <option value="Ponzi / Fake Investment Platform">Ponzi / Fake Investment Platform</option>
+            <option value="Fraudulent Phone Number / WhatsApp">Fraudulent Phone Number / WhatsApp</option>
+            <option value="Fake Business / Online Vendor">Fake Business / Instagram/WhatsApp Vendor</option>
+          </select>
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <label for="scamIndicator">Scam URL, Phone Number, or Brand Name:</label>
+          <input
+            type="text"
+            id="scamIndicator"
+            placeholder="e.g. http://wealth-pro-ng.xyz or 08012345678"
+            required
+          />
+        </div>
+
+        <div style="margin-bottom: 16px;">
+          <label for="scamDetails">What Happened? (Paste scam message or describe how they operate):</label>
+          <textarea
+            id="scamDetails"
+            rows="4"
+            placeholder="Describe how they tried to defraud you or paste the exact SMS/email content..."
+            required
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width: 100%;">
+          🚨 Submit Scam Report for Verification
+        </button>
+      </form>
+
+      <!-- Confirmation Message (Hidden until submitted) -->
+      <div id="reportSuccess" class="hidden bg-slate-950" style="border-color: #10b981;">
+        <h3 class="text-emerald-400">✅ Report Submitted Successfully!</h3>
+        <p style="font-size: 0.9rem; color: #cbd5e1; margin-top: 6px;">
+          Thank you for helping keep the community safe. Your report is now queued in the <strong>Admin Dashboard</strong> for verification.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
