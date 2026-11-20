@@ -144,17 +144,130 @@ function submitScamReport(event) {
 // ==========================================
 // 4. ADMIN DASHBOARD (admin.html)
 // ==========================================
-function handleAdminLogin(event) {
+
+const ADMIN_API = "http://127.0.0.1:5000/api/v1/auth";
+
+// Step 1: Verify email and password
+async function handleAdminLogin(event) {
   event.preventDefault();
-  const pass = document.getElementById("adminPass").value;
-  if (pass === "admin123") {
-    document.getElementById("adminLoginBox").classList.add("hidden");
-    document.getElementById("adminDashboardContent").classList.remove("hidden");
-    loadAdminReports();
-  } else {
-    alert("Invalid passcode! Use: admin123");
+
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPass").value;
+  const errorBox = document.getElementById("loginError");
+
+  errorBox.textContent = "";
+
+  try {
+    const response = await fetch(`${ADMIN_API}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify({ email, password })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      errorBox.textContent = result.error || "Login failed.";
+      return;
+    }
+
+    if (!result.otp_required) {
+      errorBox.textContent = "The server did not request OTP verification.";
+      return;
+    }
+
+    // Move to the OTP screen
+    document.getElementById("adminLoginForm").style.display = "none";
+    document.getElementById("adminOtpForm").style.display = "block";
+
+    document.getElementById("adminOTP").value = "";
+    document.getElementById("otpError").textContent = "";
+
+  } catch (error) {
+    errorBox.textContent =
+      "Cannot connect to Confirm Am. Please check that the backend is running.";
   }
 }
+
+// Step 2: Verify the email OTP
+async function verifyAdminOTP(event) {
+  event.preventDefault();
+
+  const otp = document.getElementById("adminOTP").value.trim();
+  const errorBox = document.getElementById("otpError");
+
+  errorBox.textContent = "";
+
+  if (!/^\d{6}$/.test(otp)) {
+    errorBox.textContent = "Enter a valid 6-digit OTP.";
+    return;
+  }
+
+  try {
+    const response = await fetch(`${ADMIN_API}/verify-otp`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: "include",
+      body: JSON.stringify({ otp })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      errorBox.textContent = result.error || "OTP verification failed.";
+      return;
+    }
+
+    if (!result.authenticated) {
+      errorBox.textContent = "Your login could not be verified.";
+      return;
+    }
+
+    // Reveal dashboard after server confirms authentication
+    document.getElementById("adminLoginBox").classList.add("hidden");
+    document.getElementById("adminDashboardContent").classList.remove("hidden");
+
+    document.getElementById("adminPass").value = "";
+    document.getElementById("adminOTP").value = "";
+
+    loadAdminReports();
+
+  } catch (error) {
+    errorBox.textContent = "Unable to verify OTP. Check your connection.";
+  }
+}
+
+// Step 3: Request another OTP
+async function resendAdminOTP() {
+  const errorBox = document.getElementById("otpError");
+  errorBox.textContent = "";
+
+  try {
+    const response = await fetch(`${ADMIN_API}/resend-otp`, {
+      method: "POST",
+      credentials: "include"
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      errorBox.textContent = result.error || "Unable to resend OTP.";
+      return;
+    }
+
+    errorBox.textContent = "A new verification code has been sent.";
+    errorBox.style.color = "#34d399";
+
+  } catch (error) {
+    errorBox.textContent = "Unable to contact the server.";
+  }
+}
+
 
 function loadAdminReports() {
   const container = document.getElementById("reportsContainer");
