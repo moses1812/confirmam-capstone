@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — ConfirmAm</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body onload="loadAdminReports()">
+
+  <!-- Navbar -->
+  <nav>
+    <div>
+      <div>
+        <span>🛡️</span>
+        <strong style="color: #fff; font-size: 1.2rem;">Confirm<span style="color: #34d399;">Am</span></strong>
+      </div>
+      <div>
+        <a href="index.html">Scanner</a>
+        <a href="report.html">Report a Scam</a>
+        <a href="admin.html" style="color: #34d399;">Admin</a>
+        <a href="#" id="signOutLink" class="hidden" onclick="adminLogout(); return false;">Sign out</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width: 920px;">
+    <div>
+      <p style="color: #34d399; font-weight: 600; font-size: 0.85rem;">Threat Intelligence Control Center</p>
+      <h1>Admin <span>Verification Dashboard</span></h1>
+      <p>Review, verify, and manage community-submitted fraud reports.</p>
+    </div>
+
+    <!-- Admin Login Gate -->
+    <div id="adminLoginBox" class="bg-slate-900" style="max-width: 420px; margin: 0 auto;">
+      <h3 style="margin-bottom: 12px; color: #fff;">🔒 Admin Sign In</h3>
+      <form onsubmit="handleAdminLogin(event)">
+        <div style="margin-bottom: 14px;">
+          <label for="adminPass">Admin passcode:</label>
+          <input type="password" id="adminPass" placeholder="Enter admin passcode" autocomplete="current-password" required />
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%;">Unlock Dashboard</button>
+      </form>
+    </div>
+
+    <!-- Main Dashboard Content (Hidden until logged in) -->
+    <div id="adminDashboardContent" class="hidden">
+      <!-- Stats Row -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
+        <div class="bg-slate-900" style="margin-bottom: 0; text-align: center;">
+          <p style="color: #94a3b8; font-size: 0.85rem;">Total Reports</p>
+          <h2 id="statTotal" style="font-size: 2rem; color: #fff;">0</h2>
+        </div>
+        <div class="bg-slate-900" style="margin-bottom: 0; text-align: center;">
+          <p style="color: #94a3b8; font-size: 0.85rem;">Pending Review</p>
+          <h2 id="statPending" class="text-amber-400" style="font-size: 2rem;">0</h2>
+        </div>
+        <div class="bg-slate-900" style="margin-bottom: 0; text-align: center;">
+          <p style="color: #94a3b8; font-size: 0.85rem;">Verified Scams</p>
+          <h2 id="statApproved" class="text-emerald-400" style="font-size: 2rem;">0</h2>
+        </div>
+      </div>
+
+      <!-- Reported scam numbers (NigeriaPhoneBook) -->
+      <div class="bg-slate-900">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h3 style="color: #fff;">📞 Reported scam numbers</h3>
+            <p id="phoneListInfo" style="color: #94a3b8; font-size: 0.85rem;">Loading...</p>
+          </div>
+          <button id="phoneSyncBtn" onclick="syncPhoneList()" style="background: #1e293b; color: #34d399; padding: 6px 12px; font-size: 0.8rem;">Sync now</button>
+        </div>
+      </div>
+
+      <!-- Reports List -->
+      <div class="bg-slate-900">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <h3 style="color: #fff;">📋 Submitted Fraud Reports</h3>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <button id="flt-Pending" onclick="setReportFilter('Pending')" style="background: #1e293b; color: #34d399; padding: 6px 12px; font-size: 0.8rem;">Pending</button>
+            <button id="flt-Verified" onclick="setReportFilter('Verified')" style="background: #1e293b; color: #34d399; padding: 6px 12px; font-size: 0.8rem;">Verified</button>
+            <button id="flt-Rejected" onclick="setReportFilter('Rejected')" style="background: #1e293b; color: #34d399; padding: 6px 12px; font-size: 0.8rem;">Rejected</button>
+            <button id="flt-All" onclick="setReportFilter('')" style="background: #1e293b; color: #34d399; padding: 6px 12px; font-size: 0.8rem;">All</button>
+          </div>
+        </div>
+
+        <div id="reportsContainer" style="display: flex; flex-direction: column; gap: 14px;">
+          <!-- Reports render here automatically -->
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

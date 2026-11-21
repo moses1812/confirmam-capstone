@@ -1,0 +1,27 @@
+{
+  "model": "message_tfidf_logreg",
+  "train_samples": 6866,
+  "test_samples": 2123,
+  "overall": {
+    "roc_auc": 0.9891,
+    "avg_precision": 0.9648,
+    "precision": 0.8997,
+    "recall": 0.8772,
+    "f1": 0.8883
+  },
+  "ng_heldout": {
+    "n": 722,
+    "roc_auc": 0.9653,
+    "precision": 0.8249,
+    "recall": 0.8326,
+    "f1": 0.8287
+  },
+  "sms_heldout": {
+    "n": 1401,
+    "roc_auc": 0.9932,
+    "precision": 0.9942,
+    "recall": 0.9293,
+    "f1": 0.9607
+  },
+  "sanity_correct": "14/14"
+}

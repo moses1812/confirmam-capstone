@@ -1,0 +1,22 @@
+{
+  "model": "url_host_logreg",
+  "train_samples": 129094,
+  "test_samples": 32441,
+  "roc_auc": 0.9156,
+  "avg_precision": 0.8983,
+  "thr_0.5": {
+    "precision": 0.812,
+    "recall": 0.7912,
+    "f1": 0.8014
+  },
+  "thr_0.8": {
+    "precision": 0.9424,
+    "recall": 0.5946,
+    "f1": 0.7292
+  },
+  "thr_0.9": {
+    "precision": 0.9734,
+    "recall": 0.4848,
+    "f1": 0.6472
+  }
+}

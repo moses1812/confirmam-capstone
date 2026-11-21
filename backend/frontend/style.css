@@ -1,0 +1,150 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #020617;
+  color: #f1f5f9;
+  line-height: 1.6;
+}
+
+/* Navbar */
+nav {
+  background-color: #0f172a;
+  border-bottom: 1px solid #1e293b;
+  padding: 16px 24px;
+}
+
+nav > div {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav a {
+  color: #cbd5e1;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+nav a:hover {
+  color: #34d399;
+}
+
+/* Main Container */
+main {
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  font-size: 2.2rem;
+  text-align: center;
+  margin: 12px 0;
+  color: #ffffff;
+}
+
+h1 span {
+  color: #34d399;
+}
+
+main > div:first-child p {
+  text-align: center;
+  color: #94a3b8;
+  margin-bottom: 28px;
+}
+
+/* Scanner Card */
+.bg-slate-900 {
+  background-color: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+textarea, input, select {
+  width: 100%;
+  background-color: #020617;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 14px;
+  color: #f8fafc;
+  font-size: 0.95rem;
+}
+
+textarea:focus, input:focus, select:focus {
+  outline: none;
+  border-color: #10b981;
+}
+
+/* Buttons */
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  transition: 0.2s;
+}
+
+button[onclick="runConfirmAm()"], .btn-primary {
+  background-color: #10b981;
+  color: #020617;
+  padding: 12px 24px;
+  font-size: 1rem;
+  margin-top: 12px;
+}
+
+button[onclick="runConfirmAm()"]:hover, .btn-primary:hover {
+  background-color: #34d399;
+}
+
+button[onclick="loadSampleScam()"] {
+  background: transparent;
+  color: #34d399;
+  text-decoration: underline;
+  padding: 8px 0;
+  margin-right: 16px;
+}
+
+/* Result Box */
+.hidden {
+  display: none;
+}
+
+.text-red-400 { color: #f87171; }
+.text-amber-400 { color: #fbbf24; }
+.text-emerald-400 { color: #34d399; }
+
+ul {
+  margin-left: 20px;
+  margin-top: 8px;
+  color: #cbd5e1;
+}
+
+li {
+  margin-bottom: 6px;
+}
+
+.bg-slate-950 {
+  background-color: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: 16px;
+}

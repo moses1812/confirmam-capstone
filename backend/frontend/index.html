@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ConfirmAm — Verify Before You Click or Pay</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+
+  <!-- Navbar -->
+  <nav class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <span class="bg-emerald-500 text-slate-950 font-extrabold px-2.5 py-1 rounded-lg text-lg">🛡️</span>
+        <span class="text-xl font-bold tracking-tight text-white">Confirm<span class="text-emerald-400">Am</span></span>
+      </div>
+      <div class="space-x-5 text-sm font-medium text-slate-300">
+        <a href="index.html" class="text-emerald-400">Scanner</a>
+        <a href="report.html" class="hover:text-white">Report a Scam</a>
+        <a href="admin.html" class="hover:text-white">Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero & Unified Smart Scanner -->
+  <main class="max-w-3xl mx-auto px-4 py-12">
+    <div class="text-center mb-8">
+      <span class="inline-block bg-emerald-500/10 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-500/20 mb-3">
+        AI-Powered Digital Fraud Detection
+      </span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white mb-3">
+        No Fall Mugu. <span class="text-emerald-400">Confirm Am</span> First.
+      </h1>
+      <p class="text-slate-400 text-base sm:text-lg">
+        Paste any suspicious link, bank SMS, email, investment website, or phone number below to check its Fraud Risk Score instantly.
+      </p>
+    </div>
+
+    <!-- Scanner Card -->
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <label for="scanInput" class="block text-sm font-medium text-slate-300 mb-2">
+        Paste URL, Suspicious Message, or Phone Number:
+      </label>
+      <textarea
+        id="scanInput"
+        rows="4"
+        placeholder="Example: Urgent! Your GTBank account has been restricted. Click http://gtb-verify-ng.xyz or send your BVN/OTP now..."
+        class="w-full bg-slate-950 border border-slate-700 rounded-xl p-4 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+      ></textarea>
+
+      <div class="mt-4 flex flex-col sm:flex-row gap-3 justify-between items-center">
+        <button
+          onclick="loadSampleScam()"
+          type="button"
+          class="text-xs text-slate-400 hover:text-emerald-400 underline"
+        >
+          Try a sample fake bank alert
+        </button>
+        <button
+          onclick="runConfirmAm()"
+          type="button"
+          class="w-full sm:w-auto bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold px-8 py-3 rounded-xl transition cursor-pointer"
+        >
+          🔍 Confirm Am Now
+        </button>
+      </div>
+    </div>
+
+    <!-- Scan Result Box (Hidden by default) -->
+    <div id="resultBox" class="hidden mt-8 bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl">
+      <div class="flex flex-wrap justify-between items-center gap-4 border-b border-slate-800 pb-4">
+        <div>
+          <p class="text-xs uppercase tracking-wider text-slate-400">Detection Verdict</p>
+          <h2 id="verdictTitle" class="text-2xl font-extrabold text-red-400">HIGH RISK — LIKELY SCAM</h2>
+        </div>
+        <div class="text-right">
+          <p class="text-xs text-slate-400">Fraud Risk Score</p>
+          <span id="riskScoreBadge" class="text-3xl font-black text-red-400">88%</span>
+        </div>
+      </div>
+
+      <!-- Red Flags Detected -->
+      <div class="mt-5">
+        <h3 class="text-sm font-semibold text-slate-300 mb-2">🚩 Red Flags Detected:</h3>
+        <ul id="flagsList" class="list-disc list-inside text-sm text-slate-300 space-y-1"></ul>
+      </div>
+
+      <!-- Actionable Advice -->
+      <div class="mt-5 bg-slate-950 border border-slate-800 rounded-xl p-4">
+        <h3 class="text-sm font-semibold text-emerald-400 mb-2">🛡️ Recommended Safety Action:</h3>
+        <ul id="adviceList" class="list-disc list-inside text-sm text-slate-300 space-y-1"></ul>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
